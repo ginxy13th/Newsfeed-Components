@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'New Title',
+    date: 'March 13th, 1987',
+    firstParagraph: 'Random text goes here for first paragraph.',
+    secondParagraph: 'Random text goes here for second paragraph.',
+    thirdParagraph: 'Random text goes here for second paragraph.'
   }
 ];
 
@@ -111,3 +118,43 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+
+function articleMaker(obj){
+ let article = document.createElement('div');
+  article.classList.add('article');
+
+  let a = document.createElement('h2');
+   a.textContent = obj.title;
+  let b = document.createElement('p');
+  b.classList.add('date');
+  b.textContent = obj.date;
+  let c = document.createElement('p')
+  c.textContent = obj.firstParagraph;
+  let d = document.createElement('p');
+  d.textContent = obj.secondParagraph;
+  let e = document.createElement('p');
+  e.textContent = obj.thirdParagraph;
+  
+  let span = document.createElement('span');
+  span.classList.add('expandButton');
+  span.textContent = '+';
+  span.addEventListener('click', () => {
+    article.classList.toggle('article-open');
+  });
+
+article.prepend(b);
+article.prepend(a);
+article.appendChild(c);
+article.appendChild(d);
+article.appendChild(e);
+article.appendChild(span);
+
+return article;
+}
+
+
+let articles = document.querySelector('.articles');
+data.forEach((obj) => {
+ let newArt = articleMaker(obj);
+ articles.appendChild(newArt);
+})
